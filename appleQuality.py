@@ -29,14 +29,13 @@ data.info()
 # converting object values to numeric
 data.Quality = [0 if quality == "bad" else 1 for quality in data.Quality]
 #%% 
-#x and y
 
+#x and y
 y = data.Quality.values
 x = data.drop(["Quality"],axis = 1)
 
 #%%
 # Train test split
-
 from sklearn.model_selection import train_test_split
 
 x_train,x_test, y_train,y_test = train_test_split(x, y,test_size=0.2,random_state=42)
@@ -49,7 +48,6 @@ y_test = y_test.T
 
 #%% 
 # Initalizing weight and bias
-
 def initialize(dimension):
     
     w = np.full((dimension,1),0.01)
@@ -129,19 +127,18 @@ def logistic_regression(x_train,x_test,y_train,y_test,learning_rate,number_of_it
     
     print("test accuracy: {} %".format(100 - np.mean(np.abs(y_predictions - y_test)) * 100))
 
+
 #%%
 # Testing
 logistic_regression(x_train, x_test, y_train, y_test, 1,45)
     
 
     
-    
 #%%
 # Logistic regression with sklearn library
 from sklearn.linear_model import LogisticRegression
 
 lr = LogisticRegression()
-
 lr.fit(x_train.T,y_train.T)
 
 print("Score: ",lr.score(x_test.T,y_test.T))
